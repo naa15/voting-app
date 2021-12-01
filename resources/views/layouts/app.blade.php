@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -29,9 +30,8 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); 
-                                this.closest('form').submit();">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); 
+                                    this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </a>
                         </form>
@@ -55,14 +55,12 @@
 
     <main class="container mx-auto max-w-custom flex flex-col md:flex-row">
         <div class="w-70 mx-auto md:mx-0 md:mr-5">
-            <div class="bg-white md:sticky md:top-8 border-2 border-blue rounded-xl mt-16" 
-                style="
+            <div class="bg-white md:sticky md:top-8 border-2 border-blue rounded-xl mt-16" style="
                     border-image-source: linear-gradient(to bottom, rgba(50, 138, 241, 0.22), rgba(99, 123, 255, 0));
                     border-image-slice: 1;
                     background-image: linear-gradient(to bottom, #ffffff, #ffffff), linear-gradient(to bottom, rgba(50, 138, 241, 0.22), rgba(99, 123, 255, 0));
                     background-origin: border-box;
-                    background-clip: content-box, border-box;"
-            >
+                    background-clip: content-box, border-box;">
                 <div class="text-center px-6 py-2 pt-6">
                     <h3 class="font-semibold text-base">Add an idea</h3>
                     <p class="text-xs mt-4">Let us know what you would like and we'll take a look over!</p>
@@ -124,12 +122,11 @@
                             class="text-gray-400 transition duration-150 ease-in border-b-4 pb-3 hover:border-blue"">In Progress (1)</a></li>
                 </ul>
 
-                <ul class="               flex uppercase font-semibold border-b-4 pb-3 space-x-10">
+                <ul class="                flex uppercase font-semibold border-b-4 pb-3 space-x-10">
                     <li><a href="#"
                             class="text-gray-400 transition duration-150 ease-in border-b-4 pb-3 hover:border-blue">Implemented
                             (100)</a></li>
-                    <li><a href="
-                            #"
+                    <li><a href="#"
                             class="text-gray-400 transition duration-150 ease-in border-b-4 pb-3 hover:border-blue">Closed
                             (55)</a></li>
                 </ul>
@@ -140,6 +137,7 @@
             </div>
         </div>
     </main>
+    @livewireScripts
 </body>
 
 </html>
