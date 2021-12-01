@@ -10,6 +10,8 @@ class Idea extends Model
 {
     use HasFactory, Sluggable;
 
+    const PAGINATION_COUNT = 10;
+
     protected $guarded = [];
 
     /**
@@ -17,7 +19,7 @@ class Idea extends Model
      *
      * @return array
      */
-    
+
     public function sluggable(): array
     {
         return [
@@ -31,6 +33,4 @@ class Idea extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
 }
