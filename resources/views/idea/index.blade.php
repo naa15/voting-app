@@ -35,8 +35,21 @@
     <!--- end filters--->
 
     <div class="ideas-container space-y-6 my-6">
-        @foreach($ideas as $idea)
-            <div
+        @foreach ($ideas as $idea)
+            <div 
+                x-data 
+                @click=
+                "
+                    clicked = $event.target
+                    target = clicked.tagName.toLowerCase()
+
+                    ignores = ['button', 'svg', 'path', 'a']
+
+                    if(! ignores.includes(target)) {
+                        clicked.closest('.idea-container').querySelector('.idea-link').click()
+                    }
+
+                "
                 class="idea-container hover:shadow-card transition duration-150 ease-in bg-white rounded-xl flex cursor-pointer">
                 <div class="hidden md:block border-r border-gray-100 px-5 py-8">
                     <div class="text-center">
@@ -60,7 +73,7 @@
                     </div>
                     <div class="w-full flex flex-col justify-between mx-2 md:mx-4">
                         <h4 class="text-xl font-semibold mt-2 md:mt-0">
-                            <a href="{{ route('idea.show', $idea) }}" class="hover:underline">{{ $idea->title }}</a>
+                            <a href="{{ route('idea.show', $idea) }}" class="idea-link hover:underline">{{ $idea->title }}</a>
                         </h4>
                         <div class="text-gray-600 mt-3 line-clamp-3 pr-2">
                             {{ $idea->description }}
@@ -85,8 +98,8 @@
                                             d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
                                             style="color: rgba(163, 163, 163, .5)">
                                     </svg>
-                                    <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
-                                        @keydown.escape.window="isOpen = false"
+                                    <ul x-cloak x-show="isOpen" x-transition.origin.top.left
+                                        @click.away="isOpen = false" @keydown.escape.window="isOpen = false"
                                         class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 md:ml-8
                                         top-8 md:top-6 right-0 md:left-0">
                                         <li><a href="#"
@@ -117,7 +130,7 @@
                     </div>
                 </div>
             </div>
-        <!--- end single idea-container --->
+            <!--- end single idea-container --->
         @endforeach
         {{-- <div
             class="idea-container hover:shadow-card transition duration-150 ease-in bg-white rounded-xl flex cursor-pointer">
