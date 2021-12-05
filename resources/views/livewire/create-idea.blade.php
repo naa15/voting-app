@@ -50,8 +50,13 @@
 
     <div>
         @if (session('success_message'))
-            <div x-data="{ isVisible: true }" x-show="isVisible" x-init="setTimeOut(() => isVisible = false, 5000)"
-                x-transition.duration.1000ms class="text-green mt-4">
+            <div 
+                x-data="{ isVisible: true }" 
+                x-show="isVisible" 
+                x-init="setTimeout(() => isVisible = false, 5000)"
+                x-transition.duration.1000ms 
+                class="text-green mt-4"
+            >
                 {{ session('success_message') }}
             </div>
         @endif
