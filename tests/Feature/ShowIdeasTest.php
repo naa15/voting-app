@@ -25,7 +25,7 @@ class ShowIdeasTest extends TestCase
         $statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
         $statusConsidering = Status::factory()->create(['name' => 'Considering', 'class' => 'bg-purple text-white']);
 
-        $ideaOne= Idea::factory()->create([
+        $ideaOne = Idea::factory()->create([
             'user_id' => $user->id,
             'title' => 'My First Idea',
             'category_id' => $categoryOne->id,
@@ -33,7 +33,7 @@ class ShowIdeasTest extends TestCase
             'description'=> 'Description of my first idea',
         ]);
 
-        $ideaTwo= Idea::factory()->create([
+        $ideaTwo = Idea::factory()->create([
             'user_id' => $user->id,
             'title' => 'My Second Idea',
             'category_id' => $categoryTwo->id,
@@ -48,10 +48,10 @@ class ShowIdeasTest extends TestCase
         $response->assertSee($ideaOne->description);
         $response->assertSee($categoryOne->name);
         $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
-        // $response->assertSee($ideaTwo->title);
-        // $response->assertSee($ideaTwo->description);
-        // $response->assertSee($categoryTwo->name);
-        // $response->assertSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
+        $response->assertSee($ideaTwo->title);
+        $response->assertSee($ideaTwo->description);
+        $response->assertSee($categoryTwo->name);
+        $response->assertSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
     }
 
     /** @test */
@@ -63,7 +63,7 @@ class ShowIdeasTest extends TestCase
 
         $statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
         
-        $idea= Idea::factory()->create([
+        $idea = Idea::factory()->create([
                 'user_id' => $user->id,
                 'title' => 'My First Idea',
                 'category_id' => $categoryOne->id,
