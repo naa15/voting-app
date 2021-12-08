@@ -60,7 +60,7 @@ class GravatarTest extends TestCase
         $user = User::factory()->create([
                 'name' => 'Andre',
                 'email' => '0fakeemail@fake.com'
-            ]);
+        ]);
     
         $gravatarUrl = $user->getAvatar();
     
