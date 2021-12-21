@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function ideas()
-    {
-        return $this->hasMany(Idea::class);
-    }
+	public function ideas()
+	{
+		return $this->hasMany(Idea::class);
+	}
 }
