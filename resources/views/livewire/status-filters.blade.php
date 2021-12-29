@@ -9,8 +9,7 @@
 
         <ul class="flex uppercase font-semibold border-b-4 pb-3 space-x-10">
         <li><a wire:click.prevent="setStatus('Implemented')" href="#"
-                class="transition duration-150 ease-in border-b-4 pb-3 hover:border-blue @if ($status == 'Implemented') border-blue text-gray-900 @endif">Implemented
-                ({{ $statusCount['implemented'] }})</a></li>
+                class="transition duration-150 ease-in border-b-4 pb-3 hover:border-blue @if ($status == 'Implemented') border-blue text-gray-900 @endif">Implemented ({{ $statusCount['implemented'] }})</a></li>
         <li><a wire:click.prevent="setStatus('Closed')" href="#" class="transition duration-150 ease-in border-b-4 pb-3 hover:border-blue @if ($status == 'Closed') border-blue text-gray-900 @endif">Closed
                 ({{ $statusCount['closed'] }})</a></li>
     </ul>
