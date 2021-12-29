@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Idea;
@@ -12,144 +11,143 @@ use App\Models\Status;
 
 class ShowIdeasTest extends TestCase
 {
-    use RefreshDatabase;
+	use RefreshDatabase;
 
-    /** @test */
-    public function list_of_ideas_shows_on_main_page()
-    {
-        $user = User::factory()->create();
+	/** @test */
+	public function list_of_ideas_shows_on_main_page()
+	{
+		$user = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-        $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
-        
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
-        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'class' => 'bg-purple text-white']);
+		$categoryOne = Category::factory()->create(['name' => 'Category 1']);
+		$categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
-        $ideaOne = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My First Idea',
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'description'=> 'Description of my first idea',
-        ]);
+		$statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
+		$statusConsidering = Status::factory()->create(['name' => 'Considering', 'class' => 'bg-purple text-white']);
 
-        $ideaTwo = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My Second Idea',
-            'category_id' => $categoryTwo->id,
-            'status_id' => $statusConsidering->id,
-            'description'=> 'Description of my second idea',
-        ]);
+		$ideaOne = Idea::factory()->create([
+			'user_id'     => $user->id,
+			'title'       => 'My First Idea',
+			'category_id' => $categoryOne->id,
+			'status_id'   => $statusOpen->id,
+			'description' => 'Description of my first idea',
+		]);
 
-        $response = $this->get(route('idea.index'));
+		$ideaTwo = Idea::factory()->create([
+			'user_id'     => $user->id,
+			'title'       => 'My Second Idea',
+			'category_id' => $categoryTwo->id,
+			'status_id'   => $statusConsidering->id,
+			'description' => 'Description of my second idea',
+		]);
 
-        $response->assertSuccessful();
-        $response->assertSee($ideaOne->title);
-        $response->assertSee($ideaOne->description);
-        $response->assertSee($categoryOne->name);
-        // $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
-        $response->assertSee($ideaTwo->title);
-        $response->assertSee($ideaTwo->description);
-        $response->assertSee($categoryTwo->name);
-        // $response->assertSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
-    }
+		$response = $this->get(route('idea.index'));
 
-    /** @test */
-    public function single_idea_shows_correctly_on_show_page()
-    {
-        $user = User::factory()->create();
+		$response->assertSuccessful();
+		$response->assertSee($ideaOne->title);
+		$response->assertSee($ideaOne->description);
+		$response->assertSee($categoryOne->name);
+		// $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
+		$response->assertSee($ideaTwo->title);
+		$response->assertSee($ideaTwo->description);
+		$response->assertSee($categoryTwo->name);
+		// $response->assertSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
+	}
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
+	/** @test */
+	public function single_idea_shows_correctly_on_show_page()
+	{
+		$user = User::factory()->create();
 
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
-        
-        $idea = Idea::factory()->create([
-                'user_id' => $user->id,
-                'title' => 'My First Idea',
-                'category_id' => $categoryOne->id,
-                'status_id' => $statusOpen->id,
-                'description'=> 'Description of my first idea',
-        ]);
-    
-           
-        $response = $this->get(route('idea.index'));
-    
-        $response->assertSuccessful();
-        $response->assertSee($idea->title);
-        $response->assertSee($idea->description);
-        $response->assertSee($categoryOne->name);
-        // $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
-    }
+		$categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
-    /** @test */
-    public function ideas_pagination_works()
-    {
-        $user = User::factory()->create();
+		$statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
+		$idea = Idea::factory()->create([
+			'user_id'     => $user->id,
+			'title'       => 'My First Idea',
+			'category_id' => $categoryOne->id,
+			'status_id'   => $statusOpen->id,
+			'description' => 'Description of my first idea',
+		]);
 
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
+		$response = $this->get(route('idea.index'));
 
-        Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
-            'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-        ]);
+		$response->assertSuccessful();
+		$response->assertSee($idea->title);
+		$response->assertSee($idea->description);
+		$response->assertSee($categoryOne->name);
+		// $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
+	}
 
-        $ideaOne = Idea::find(1);
-        $ideaOne->title = 'My First Idea';
-        $ideaOne->save();
+	/** @test */
+	public function ideas_pagination_works()
+	{
+		$user = User::factory()->create();
 
-        $ideaEleven = Idea::find(11);
-        $ideaEleven->title = 'My Eleventh Idea';
-        $ideaEleven->save();
+		$categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
-        $response = $this->get('/');
-            
-        $response->assertSee($ideaEleven->title);
-        $response->assertDontSee($ideaOne->title);
+		$statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
 
-        $response = $this->get('/?page=2');
+		Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
+			'user_id'     => $user->id,
+			'category_id' => $categoryOne->id,
+			'status_id'   => $statusOpen->id,
+		]);
 
-        $response->assertSee($ideaOne->title);
-        $response->assertDontSee($ideaEleven->title);
-    }
+		$ideaOne = Idea::find(1);
+		$ideaOne->title = 'My First Idea';
+		$ideaOne->save();
 
-    /** @test */
-    public function same_idea_title_different_slugs()
-    {
-        $user = User::factory()->create();
-        
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-        $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
-        
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
+		$ideaEleven = Idea::find(11);
+		$ideaEleven->title = 'My Eleventh Idea';
+		$ideaEleven->save();
 
-        $ideaOne = Idea::factory()->create([
-                'user_id' => $user->id,
-                'title' => 'My First Idea',
-                'category_id' => $categoryOne->id,
-                'status_id' => $statusOpen->id,
-                'description' => 'Description for my first idea',
-        ]);
+		$response = $this->get('/');
 
-        $ideaTwo = Idea::factory()->create([
-                'user_id' => $user->id,
-                'title' => 'My First Idea',
-                'category_id' => $categoryTwo->id,
-                'status_id' => $statusOpen->id,
-                'description' => 'Description for my second idea',
-        ]);
+		$response->assertSee($ideaEleven->title);
+		$response->assertDontSee($ideaOne->title);
 
-        $response = $this->get(route('idea.show', $ideaOne));
+		$response = $this->get('/?page=2');
 
-        $response->assertSuccessful();
-        $this->assertTrue(request()->path() === 'ideas/my-first-idea');
+		$response->assertSee($ideaOne->title);
+		$response->assertDontSee($ideaEleven->title);
+	}
 
-        $response = $this->get(route('idea.show', $ideaTwo));
+	/** @test */
+	public function same_idea_title_different_slugs()
+	{
+		$user = User::factory()->create();
 
-        $response->assertSuccessful();
-        echo(request()->path());
-        $this->assertTrue(request()->path() === 'ideas/my-first-idea-2');
-    }
+		$categoryOne = Category::factory()->create(['name' => 'Category 1']);
+		$categoryTwo = Category::factory()->create(['name' => 'Category 2']);
+
+		$statusOpen = Status::factory()->create(['name' => 'Open', 'class' => 'bg-gray-200']);
+
+		$ideaOne = Idea::factory()->create([
+			'user_id'     => $user->id,
+			'title'       => 'My First Idea',
+			'category_id' => $categoryOne->id,
+			'status_id'   => $statusOpen->id,
+			'description' => 'Description for my first idea',
+		]);
+
+		$ideaTwo = Idea::factory()->create([
+			'user_id'     => $user->id,
+			'title'       => 'My First Idea',
+			'category_id' => $categoryTwo->id,
+			'status_id'   => $statusOpen->id,
+			'description' => 'Description for my second idea',
+		]);
+
+		$response = $this->get(route('idea.show', $ideaOne));
+
+		$response->assertSuccessful();
+		$this->assertTrue(request()->path() === 'ideas/my-first-idea');
+
+		$response = $this->get(route('idea.show', $ideaTwo));
+
+		$response->assertSuccessful();
+		echo request()->path();
+		$this->assertTrue(request()->path() === 'ideas/my-first-idea-2');
+	}
 }
