@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\StatusFilters;
 use Livewire\Livewire;
+use App\Http\Livewire\IdeasIndex;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
@@ -94,11 +95,8 @@ class StatusFiltersTest extends TestCase
 
 		$categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
-		$statusOpen = Status::factory()->create(['name' => 'Open']);
 		$statusConsidering = Status::factory()->create(['name' => 'Considering', 'class' => 'bg-purple text-white']);
 		$statusInProgress = Status::factory()->create(['name' => 'In Progress', 'class' => 'bg-yellow text-white']);
-		$statusImplemented = Status::factory()->create(['name' => 'Implemented']);
-		$statusClosed = Status::factory()->create(['name' => 'Closed']);
 
 		Idea::factory()->create([
 			'user_id'     => $user->id,
@@ -140,10 +138,12 @@ class StatusFiltersTest extends TestCase
 			'description' => 'My first idea description',
 		]);
 
-		$response = $this->get(route('idea.index', ['status' => 'In Progress']));
-		$response->assertSuccessful();
-		$response->assertDontSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
-		$response->assertSee('<div class="bg-yellow text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">In Progress</div>', false);
+		Livewire::withQueryParams(['status' => 'Considering'])
+			->test(IdeasIndex::class)
+			->assertViewHas('ideas', function ($ideas) {
+				return $ideas->count() == 2
+					&& $ideas->first()->status->name === 'Considering';
+			});
 	}
 
 	/** @test*/
