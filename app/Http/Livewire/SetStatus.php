@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\NotifyAllVoters;
 use App\Mail\IdeaStatusUpdatedMailable;
 use Livewire\Component;
 use App\Models\Idea;
@@ -34,7 +35,7 @@ class SetStatus extends Component
 
 		if ($this->notifyAllVoters)
 		{
-			$this->notifyAllVoters();
+			NotifyAllVoters::dispatch($this->idea);
 		}
 
 		$this->emit('statusWasUpdated');
