@@ -48,8 +48,8 @@ class SetStatus extends Component
 			->chunk(100, function ($voters) {
 				foreach ($voters as $user)
 				{
-                    Mail::to($user)
-                        ->queue(new IdeaStatusUpdatedMailable($this->idea));
+					Mail::to($user)
+						->queue(new IdeaStatusUpdatedMailable($this->idea));
 				}
 			});
 	}
