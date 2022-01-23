@@ -16,15 +16,13 @@
         </div>
         <div class="mt-8">
             @if ($hasVoted)
-                <button
-                    type="button" wire:click.prevent="vote"
+                <button type="button" wire:click.prevent="vote"
                     class="w-20 bg-blue text-white border border-blue hover:border-blue-hover font-bold
                     text-xxs uppercase rounded-xl transition duration-150 ease-in px-4 py-3">
                     Voted
                 </button>
             @else
-                <button
-                    type="button" wire:click.prevent="vote"
+                <button type="button" wire:click.prevent="vote"
                     class="w-20 bg-gray-200  border border-gray-200 hover:border-gray-400 font-bold
                     text-xxs uppercase rounded-xl transition duration-150 ease-in px-4 py-3">
                     Vote
@@ -55,30 +53,9 @@
                     <div class="text-gray-900">3 Comments</div>
                 </div>
                 <div x-data="{ isOpen: false }" class="flex items-center space-x-2 mt-4 md:mt-0">
-                    <div class="{{ $idea->status->class }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
-                    <button @click="isOpen = !isOpen"
-                        class="relative bg-gray-100 hover:bg-gray-200 border outline-none rounded-full h-7 transition duration-150 ease-in py-2 px-3">
-                        <svg fill="currentColor" width="24" height="6">
-                            <path
-                                d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
-                                style="color: rgba(163, 163, 163, .5)">
-                        </svg>
-                        <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
-                            @keydown.escape.window="isOpen = false"
-                            class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 md:ml-8
-                            top-8 md:top-6 right-0 md:left-0">
-                            <li><a href="#"
-                                    class="hover:bg-gray-100 block transition duration-150
-                                ease-in px-5 py-3">Mark
-                                    as Spam</a></li>
-                            <li></li>
-                            <li><a href="#"
-                                    class="hover:bg-gray-100 block transition duration-150
-                                ease-in px-5 py-3">Delete</a>
-                            </li>
-                            <li></li>
-                        </ul>
-                    </button>
+                    <div class="{{ $idea->status->class }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
+                        {{ $idea->status->name }}
+                    </div>
                 </div>
                 <div class="flex items-center md:hidden mt-4 md:mt-0">
                     <div class="bg-gray-100 text-center rounded-3xl h-10 px-4 py-2 pr-8">
@@ -86,15 +63,13 @@
                         <div class="text-xxs font-semibold leading-none text-gray-400">Votes</div>
                     </div>
                     @if ($hasVoted)
-                        <button
-                            type="button" wire:click.prevent="vote"
+                        <button type="button" wire:click.prevent="vote"
                             class="w-20 bg-blue text-white border border-blue hover:border-blue-hover font-bold
                             text-xxs uppercase rounded-3xl transition duration-150 ease-in px-4 py-3 -mx-7">
                             Voted
                         </button>
                     @else
-                        <button
-                            type="button" wire:click.prevent="vote"
+                        <button type="button" wire:click.prevent="vote"
                             class="w-20 bg-gray-200 border border-gray-200 hover:border-gray-400 font-bold
                             text-xxs uppercase rounded-3xl transition duration-150 ease-in px-4 py-3 -mx-7">
                             Vote
