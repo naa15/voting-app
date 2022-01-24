@@ -17,7 +17,7 @@ class EditIdea extends Component
 
 	public $description;
 
-    protected $rules = [
+	protected $rules = [
 		'title'       => 'required|min:4',
 		'category'    => 'required|integer|exists:categories,id',
 		'description' => 'required|min:4',
@@ -31,22 +31,23 @@ class EditIdea extends Component
 		$this->category = $idea->category_id;
 	}
 
-    public function updateIdea()
-    {
-        if (auth()->guest() || auth()->user()->cannot('update', $this->idea)) {
-            abort(Response::HTTP_FORBIDDEN);
-        }
+	public function updateIdea()
+	{
+		if (auth()->guest() || auth()->user()->cannot('update', $this->idea))
+		{
+			abort(Response::HTTP_FORBIDDEN);
+		}
 
-        $this->validate();
+		$this->validate();
 
-        $this->idea->update([
-            'title' => $this->title,
-            'description' => $this->description,
-            'category_id' => $this->category,
-        ]);
+		$this->idea->update([
+			'title'       => $this->title,
+			'description' => $this->description,
+			'category_id' => $this->category,
+		]);
 
-        $this->emit('ideaWasUpdated');
-    }
+		$this->emit('ideaWasUpdated');
+	}
 
 	public function render()
 	{

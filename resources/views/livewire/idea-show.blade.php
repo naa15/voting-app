@@ -48,23 +48,31 @@
                                     class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 md:ml-8
                                         top-8 md:top-6 right-0 md:left-0 z-10">
                                     @can('update', $idea)
-                                    <li><a
-                                            href="#"
-                                            @click="
-                                                isOpen = false
-                                                $dispatch('edit-idea-model')
+                                        <li><a href="#" @click.prevent="
+                                                        isOpen = false
+                                                        $dispatch('edit-idea-model')
+                                                    "
+                                                class="hover:bg-gray-100 block transition duration-150
+                                        ease-in px-5 py-3">Edit
+                                                Idea</a>
+                                        </li>
+                                    @endcan
+
+                                    @can('delete', $idea)
+                                    <li><a href="#" @click.prevent="
+                                            isOpen = false
+                                            $dispatch('delete-idea-model')
                                             "
                                             class="hover:bg-gray-100 block transition duration-150
-                                        ease-in px-5 py-3">Edit Idea</a>
+                                        ease-in px-5 py-3">Delete
+                                            Idea</a>
                                     </li>
                                     @endcan
+                                    
                                     <li><a href="#"
                                             class="hover:bg-gray-100 block transition duration-150
-                                        ease-in px-5 py-3">Delete</a>
-                                    </li>
-                                    <li><a href="#"
-                                            class="hover:bg-gray-100 block transition duration-150
-                                        ease-in px-5 py-3">Mark as Spam</a>
+                                        ease-in px-5 py-3">Mark
+                                            as Spam</a>
                                     </li>
                                 </ul>
                             </div>

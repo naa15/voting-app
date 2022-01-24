@@ -7,7 +7,10 @@
             isOpen = false
         })"
     @keydown.escape.window="isOpen = false"
-    @edit-idea-model.window="isOpen = true"
+    @edit-idea-model.window="
+        isOpen = true
+        $nextTick(() => $refs.title.focus( ))
+    "
     class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
 >
     <div class="flex items-end justify-center min-h-screen">
@@ -44,7 +47,7 @@
                     created it. </p>
                 <form wire:submit.prevent="updateIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
-                        <input wire:model.defer="title" type="text"
+                        <input wire:model.defer="title" x-ref="title" type="text"
                             class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2"
                             placeholder="Your Idea" required>
                         @error('title')

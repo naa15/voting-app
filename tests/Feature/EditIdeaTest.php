@@ -24,7 +24,7 @@ class EditIdeaTest extends TestCase
 			'user_id' => $user->id,
 		]);
 
-		/* @var mixed $user */
+		/** @var mixed $user */
 		$this->actingAs($user)
 			->get(route('idea.show', $idea))
 			->assertSeeLivewire('edit-idea');
@@ -36,7 +36,7 @@ class EditIdeaTest extends TestCase
 		$user = User::factory()->create();
 		$idea = Idea::factory()->create();
 
-		/* @var mixed $user */
+		/** @var mixed $user */
 		$this->actingAs($user)
 			->get(route('idea.show', $idea))
 			->assertDontSeeLivewire('edit-idea');
