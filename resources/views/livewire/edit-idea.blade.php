@@ -2,6 +2,10 @@
     x-cloak
     x-data="{ isOpen: false }"
     x-show="isOpen"
+    x-init="
+        window.livewire.on('ideaWasUpdated', () => {
+            isOpen = false
+        })"
     @keydown.escape.window="isOpen = false"
     @edit-idea-model.window="isOpen = true"
     class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
@@ -38,7 +42,7 @@
                 <p class="text-xs text-center leading-5 text-gray-500 px-6 mt-4">You have one hour to edit your idea from
                     the time you
                     created it. </p>
-                <form wire:submit.prevent="createIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
+                <form wire:submit.prevent="updateIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
                         <input wire:model.defer="title" type="text"
                             class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2"
@@ -51,7 +55,9 @@
                     <div>
                         <select wire:model.defer="category" name="category_add" id="category_add"
                             class="w-full bg-gray-100 text-sm rounded-xl border-none px-4 py-2">
-                            <option value="1">Category 1</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     @error('category')
@@ -82,7 +88,7 @@
                             class="flex items-center justify-center w-1/2 h-11 text-xs text-white bg-blue font-semibold 
                         rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
                             <span>
-                                Submit
+                                Update
                             </span>
                         </button>
                     </div>

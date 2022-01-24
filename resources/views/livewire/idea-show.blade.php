@@ -1,6 +1,6 @@
 <div>
     <div class="idea-and-buttons container">
-        <div class="idea-container bg-white rounded-xl flex mt-4">
+        <div class="idea-container bg-white rounded-xl mt-4">
 
             <div class="flex flex-col md:flex-row px-4 py-6">
                 <div class="flex-none mx-2">
@@ -47,15 +47,17 @@
                                     @keydown.escape.window="isOpen = false"
                                     class="absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 md:ml-8
                                         top-8 md:top-6 right-0 md:left-0 z-10">
-                                    <li><a 
-                                            href="#" 
+                                    @can('update', $idea)
+                                    <li><a
+                                            href="#"
                                             @click="
-                                                isOpen = false 
+                                                isOpen = false
                                                 $dispatch('edit-idea-model')
                                             "
                                             class="hover:bg-gray-100 block transition duration-150
                                         ease-in px-5 py-3">Edit Idea</a>
                                     </li>
+                                    @endcan
                                     <li><a href="#"
                                             class="hover:bg-gray-100 block transition duration-150
                                         ease-in px-5 py-3">Delete</a>
