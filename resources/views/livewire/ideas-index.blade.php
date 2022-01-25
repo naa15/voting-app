@@ -16,6 +16,9 @@
                 <option value="No Filter">No Filter</option>
                 <option value="Top Voted">Top Voted</option>
                 <option value="My Ideas">My Ideas</option>
+                @admin
+                    <option value="Spam Ideas">Spam </option>
+                @endadmin
             </select>
         </div>
     

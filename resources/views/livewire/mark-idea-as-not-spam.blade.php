@@ -3,11 +3,11 @@
     x-data="{ isOpen: false }"
     x-show="isOpen"
     x-init="
-        window.livewire.on('ideaWasDeleted', () => {
+        window.livewire.on('ideaWasMarkedAsNotSpam', () => {
             isOpen = false
         })"
     @keydown.escape.window="isOpen = false"
-    @delete-idea-modal.window="
+    @mark-idea-as-not-spam-modal.window="
         isOpen = true
         $nextTick(() => $refs.confirmButton.focus( ))
     " 
@@ -44,25 +44,25 @@
                     </div>
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                            Delete Idea
+                            Reset Spam Counter
                         </h3>
                         <div class="mt-2">
                             <p class="text-sm text-gray-500">
-                                Are you sure you want to delete this idea? This action cannot be undone.
+                                Are you sure you want to mark this idea as NOT spam? This will reset the spam counter.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button wire:click="deleteIdea" x-ref="confirmButton" type="button"
+                <button wire:click="markAsNotSpam" x-ref="confirmButton" type="button"
                     class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm 
                     px-4 py-2 bg-blue text-base font-medium text-white hover:bg-blue-hover 
                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue sm:ml-3 sm:w-auto 
                     sm:text-sm">
-                    Delete Idea
+                    Reset Spam Counter
                 </button>
-                <button @click="isOpen = false" type="button"
+                <button @click=" isOpen = false " type="button"
                     class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm 
                     px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue sm:mt-0 sm:ml-3 
