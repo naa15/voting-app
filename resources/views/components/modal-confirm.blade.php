@@ -20,7 +20,7 @@
         isOpen = true
         $nextTick(() => $refs.confirmButton.focus( ))
     " 
-    class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+    class="z-20 fixed inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
 >
     <div 
         x-show="isOpen"
