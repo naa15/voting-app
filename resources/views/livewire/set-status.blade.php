@@ -7,8 +7,8 @@
 >
     <button type="button" @click="isOpen = !isOpen"
         class="flex items-center justify-center w-36 h-11 text-sm bg-gray-200 font-semibold
-    rounded-xl border border-gray-200 hover:border-gray-400 outline-none transition duration-150 
-    ease-in px-6 py-3 mt-2 md:mt-0">
+            rounded-xl border border-gray-200 hover:border-gray-400 outline-none transition duration-150 
+            ease-in px-6 py-3 mt-2 md:mt-0">
         <span>Set Status</span>
         <svg class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -25,7 +25,7 @@
                     <label class="inline-flex items-center">
                         <input wire:model="status" type="radio" checked=""
                             class="bg-gray-200 text-gray-600
-                    border-none"
+                                border-none"
                             name="radio-direct" value="1">
                         <span class="ml-2">Open</span>
                     </label>
@@ -35,7 +35,7 @@
                     <label class="inline-flex items-center">
                         <input wire:model="status" type="radio"
                             class="bg-gray-200 text-purple
-                    border-none"
+                                border-none"
                             name="radio-direct" value="2">
                         <span class="ml-2">Considering</span>
                     </label>
@@ -45,7 +45,7 @@
                     <label class="inline-flex items-center">
                         <input wire:model="status" type="radio"
                             class="bg-gray-200 text-yellow
-                    border-none"
+                                border-none"
                             name="radio-direct" value="3">
                         <span class="ml-2">In Progress</span>
                     </label>
@@ -55,7 +55,7 @@
                     <label class="inline-flex items-center">
                         <input wire:model="status" type="radio"
                             class="bg-gray-200 text-green
-                    border-none"
+                                border-none"
                             name="radio-direct" value="4">
                         <span class="ml-2">Implemented</span>
                     </label>
@@ -65,7 +65,7 @@
                     <label class="inline-flex items-center">
                         <input wire:model="status" type="radio"
                             class="bg-gray-200 text-red
-                    border-none"
+                                border-none"
                             name="radio-direct" value="5">
                         <span class="ml-2">Closed</span>
                     </label>
@@ -75,7 +75,7 @@
             <div>
                 <textarea name="update_comment" id="updawire:model="status" te_comment" cols="30" rows="3"
                     class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none
-            px-4 py-2"
+                        px-4 py-2"
                     placeholder="Add an update comment (optional)"></textarea>
             </div>
 
@@ -92,7 +92,7 @@
                 </button>
                 <button type="submit"
                     class="flex items-center justify-center w-1/2 h-11 text-xs text-white bg-blue font-semibold 
-                rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 disabled:opacity-50">
+                        rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 disabled:opacity-50">
                     <span>
                         Update
                     </span>
