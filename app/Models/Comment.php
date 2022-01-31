@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $guarded = [];
+	protected $guarded = [];
 
-    public function user()
+	protected $perPage = 20;
+
+	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}
 
-    public function idea()
+	public function idea()
 	{
 		return $this->belongsTo(Idea::class);
 	}

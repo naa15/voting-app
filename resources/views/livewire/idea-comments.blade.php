@@ -6,6 +6,10 @@
             @endforeach
         </div>
         <!--- end comments-container --->
+
+        <div class="my-8 ml-22">
+            {{ $comments->onEachSide(1)->links() }}
+        </div>
     @else
         <div class="mx-auto w-70 mt-2">
             <img src="{{ asset('img/no-ideas.svg') }}" alt="No Ideas" class="mx-auto mix-blend-luminosity">
