@@ -11,10 +11,17 @@ class IdeaComment extends Component
 
 	public $ideaUserId;
 
+	protected $listeners = ['commentWasUpdated'];
+
+	public function commentWasUpdated()
+	{
+		$this->comment->refresh();
+	}
+
 	public function mount(Comment $comment, $ideaUserId)
 	{
 		$this->comment = $comment;
-        $this->ideaUserId = $ideaUserId;
+		$this->ideaUserId = $ideaUserId;
 	}
 
 	public function render()
