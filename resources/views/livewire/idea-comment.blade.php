@@ -1,4 +1,4 @@
-<div class="comment-container relative bg-white rounded-xl flex mt-4">
+<div class="comment-container relative bg-white rounded-xl flex  transition duration-500 ease-in mt-4">
     <div class="flex flex-col md:flex-row flex-1 px-4 py-6">
         <div class="flex-none">
             <a href="#">
@@ -39,7 +39,7 @@
                             top-8 md:top-6 right-0 md:left-0 z-10">
                             <li><a href="#"
                                     class="hover:bg-gray-100 block transition duration-150
-                                ease-in px-5 py-3">Mark
+                                    ease-in px-5 py-3">Mark
                                     as Spam</a></li>
                             <li></li>
                             <li><a href="#"
