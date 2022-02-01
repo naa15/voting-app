@@ -112,7 +112,7 @@ class SpamManagementTest extends TestCase
 		$idea = Idea::factory()->create();
 
 		$this->get(route('idea.show', $idea))
-				->assertDontSeeLivewire('mark-idea-as-not-spam');
+			->assertDontSeeLivewire('mark-idea-as-not-spam');
 	}
 
 	/** @test*/
