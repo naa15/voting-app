@@ -1,5 +1,6 @@
 @props([
-    'eventToOpenModal',
+    'eventToOpenModal' => null,
+    'livewireEventToOpenModal' => null,
     'eventToCloseModal',
     'modalTitle',
     'modalDescription',
@@ -11,15 +12,26 @@
     x-cloak
     x-data="{ isOpen: false }"
     x-show="isOpen"
+    @keydown.escape.window="isOpen = false"
+    @if ($eventToOpenModal)
+        {{ '@' . $eventToOpenModal }}.window="
+            isOpen = true
+            $nextTick(() => $refs.confirmButton.focus( ))
+        " 
+    @endif
+
     x-init="
         Livewire.on('{{ $eventToCloseModal }}', () => {
             isOpen = false
-        })"
-    @keydown.escape.window="isOpen = false"
-    {{ '@' . $eventToOpenModal }}.window="
-        isOpen = true
-        $nextTick(() => $refs.confirmButton.focus( ))
-    " 
+        })
+        
+        @if($livewireEventToOpenModal)
+            Livewire.on('{{ $livewireEventToOpenModal }}', () => {
+                isOpen = true
+                $nextTick(() => $refs.confirmButton.focus( ))
+            })
+        @endif
+    "
     class="z-20 fixed inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
 >
     <div 
