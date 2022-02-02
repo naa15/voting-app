@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Jobs\NotifyAllVoters;
 use App\Mail\IdeaStatusUpdatedMailable;
+use App\Models\Comment;
 use Livewire\Component;
 use App\Models\Idea;
 use Illuminate\Support\Facades\Mail;
@@ -14,6 +15,8 @@ class SetStatus extends Component
 	public $idea;
 
 	public $status;
+
+	public $comment;
 
 	public $notifyAllVoters;
 
@@ -38,6 +41,16 @@ class SetStatus extends Component
 			NotifyAllVoters::dispatch($this->idea);
 		}
 
+		Comment::create([
+			'user_id'   => auth()->id(),
+			'idea_id'   => $this->idea->id,
+			'body'      => $this->comment ?? 'No comment was added.',
+			'status_id' => $this->status,
+			'is_status_update' => true,
+		]);
+
+		$this->reset('comment');
+		
 		$this->emit('statusWasUpdated', 'Status was updated successfully!');
 	}
 

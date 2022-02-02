@@ -26301,12 +26301,16 @@ select {
   position: absolute;
   display: block;
   top: 0;
-  left: -40px;
+  left: -38px;
   content: "";
   width: 3px;
   height: 100%;
   background: #edf0f5;
   /* opacity: .07; */
+}
+
+.is-status-update.comment-container:last-child::after {
+  left: -39px;
 }
 
 .comment-container::before {
@@ -26324,7 +26328,7 @@ select {
   position: absolute;
   display: block;
   top: 60px;
-  left: -40px;
+  left: -38px;
   content: "";
   width: 3px;
   height: calc(100% - 60px);
