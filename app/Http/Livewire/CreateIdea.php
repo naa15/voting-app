@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Traits\WithAuthRedirects;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Idea;
@@ -9,6 +10,8 @@ use Illuminate\Http\Response;
 
 class CreateIdea extends Component
 {
+	use WithAuthRedirects;
+
 	public $title;
 
 	public $category = 1;
